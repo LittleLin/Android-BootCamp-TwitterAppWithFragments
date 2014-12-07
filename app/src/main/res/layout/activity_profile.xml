@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="info.littlelin.apps.twitterapp.activities.ProfileActivity">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/ivProfileImage"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/tvName"
+            android:layout_toRightOf="@+id/ivProfileImage"
+            android:textSize="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tagline"
+            android:id="@+id/tvTagline"
+            android:layout_toRightOf="@+id/ivProfileImage"
+            android:layout_below="@+id/tvName"
+            android:textSize="12dp"
+            />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlHeader"
+        android:id="@+id/llFollow"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Followers"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tvFollowers"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Following"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tvFollowing"
+            />
+    </LinearLayout>
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="info.littlelin.apps.twitterapp.fragments.UserTimelienFragment"
+        android:id="@+id/fragmentUserTimeline"
+        android:layout_below="@+id/llFollow"
+        tools:layout="@layout/fragment_tweets_list" />
+
+
+</RelativeLayout>
