@@ -27,7 +27,6 @@ public class TweetsListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         this.tweets = new ArrayList<Tweet>();
-        //this.aTweets = new TweetArrayAdapter(this.getActivity(), tweets);
 
         this.aTweets = new TweetArrayAdapter(this.getActivity(), tweets, new View.OnClickListener() {
             @Override
