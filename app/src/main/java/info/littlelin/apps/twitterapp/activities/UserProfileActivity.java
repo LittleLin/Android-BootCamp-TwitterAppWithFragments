@@ -2,6 +2,7 @@ package info.littlelin.apps.twitterapp.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 
 import info.littlelin.apps.twitterapp.R;
 import info.littlelin.apps.twitterapp.TwitterApplication;
+import info.littlelin.apps.twitterapp.fragments.UserTimelienFragment;
 import info.littlelin.apps.twitterapp.models.User;
 
 public class UserProfileActivity extends FragmentActivity {
@@ -25,6 +27,21 @@ public class UserProfileActivity extends FragmentActivity {
         setContentView(R.layout.activity_profile);
 
         long userId = getIntent().getLongExtra("userId", 0l);
+
+        // Begin the transaction
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        // Replace the container with the new fragment\
+        UserTimelienFragment fragmentUserTimeline = new UserTimelienFragment();
+        Bundle args = new Bundle();
+        args.putLong("userId", userId);
+        fragmentUserTimeline.setArguments(args);
+
+        ft.replace(R.id.flUserTimeline, fragmentUserTimeline);
+
+        // Execute the changes specified
+        ft.commit();
+
         this.loadProfileInfo(userId);
     }
 

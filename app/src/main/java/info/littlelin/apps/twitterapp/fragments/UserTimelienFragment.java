@@ -28,7 +28,9 @@ public class UserTimelienFragment extends TweetsListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.client = TwitterApplication.getRestClient();
-        this.populateTime(0);
+
+        long userId = getArguments().getLong("userId");
+        this.populateTime(0, userId);
     }
 
     @Override
@@ -38,7 +40,7 @@ public class UserTimelienFragment extends TweetsListFragment {
         return view;
     }
 
-    private void populateTime(long maxId) {
+    private void populateTime(long maxId, long userId) {
         this.client.getUserTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray json) {
@@ -51,6 +53,6 @@ public class UserTimelienFragment extends TweetsListFragment {
                 Log.d("debug", e.toString());
                 Log.d("debug", s);
             }
-        });
+        }, userId);
     }
 }

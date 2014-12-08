@@ -65,13 +65,22 @@
             />
     </LinearLayout>
 
-    <fragment
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="info.littlelin.apps.twitterapp.fragments.UserTimelienFragment"
-        android:id="@+id/fragmentUserTimeline"
         android:layout_below="@+id/llFollow"
-        tools:layout="@layout/fragment_tweets_list" />
+        android:id="@+id/flUserTimeline">
+    </FrameLayout>
+
+    <!--<fragment-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:name="info.littlelin.apps.twitterapp.fragments.UserTimelienFragment"-->
+        <!--android:id="@+id/fragmentUserTimeline"-->
+        <!--android:layout_below="@+id/llFollow"-->
+        <!--tools:layout="@layout/fragment_tweets_list" />-->
+
+
 
 
 </RelativeLayout>
