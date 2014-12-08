@@ -3,6 +3,7 @@ package info.littlelin.apps.twitterapp.adapters;
 import android.content.Context;
 import android.text.format.DateUtils;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +29,16 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
     private TextView tvScreenName;
     private TextView tvBody;
     private TextView tvTimestamp;
+    private View.OnClickListener clickListener;
 
 
     public TweetArrayAdapter(Context context, List<Tweet> tweets) {
         super(context, 0, tweets);
+    }
+
+    public TweetArrayAdapter(Context context, List<Tweet> tweets, View.OnClickListener clickListener) {
+        super(context, 0, tweets);
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -55,6 +62,11 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
         ImageLoader imageLoader = ImageLoader.getInstance();
         DisplayImageOptions options = new DisplayImageOptions.Builder().showImageOnFail(R.drawable.placeholder).build();
         imageLoader.displayImage(tweet.getUser().getProfileImageUrl(), ivProfileImage, options);
+        ivProfileImage.setTag(tweet.getUser().getId());
+
+        if (this.clickListener != null) {
+            ivProfileImage.setOnClickListener(clickListener);
+        }
         this.tvUserName.setText(tweet.getUser().getName());
         this.tvScreenName.setText("@" + tweet.getUser().getScreenName());
         this.tvBody.setText(tweet.getBody());

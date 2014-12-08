@@ -80,12 +80,6 @@ public class TimelineActivity extends FragmentActivity {
             return true;
         }
 
-//        if (id == R.id.action_profile) {
-//
-//
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 

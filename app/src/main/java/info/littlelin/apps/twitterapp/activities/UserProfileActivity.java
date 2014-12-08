@@ -1,8 +1,8 @@
 package info.littlelin.apps.twitterapp.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -17,18 +17,19 @@ import info.littlelin.apps.twitterapp.R;
 import info.littlelin.apps.twitterapp.TwitterApplication;
 import info.littlelin.apps.twitterapp.models.User;
 
-public class ProfileActivity extends FragmentActivity {
+public class UserProfileActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        this.loadProfileInfo();
+        long userId = getIntent().getLongExtra("userId", 0l);
+        this.loadProfileInfo(userId);
     }
 
-    private void loadProfileInfo() {
-        TwitterApplication.getRestClient().getMyInfo(new JsonHttpResponseHandler() {
+    private void loadProfileInfo(long userId) {
+        TwitterApplication.getRestClient().getUserInfo(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 User user = User.fromJson(json);
@@ -36,7 +37,13 @@ public class ProfileActivity extends FragmentActivity {
 
                 populateProfileHeader(user);
             }
-        });
+
+            @Override
+            public void onFailure(Throwable e, String s) {
+                Log.d("debug", e.toString());
+                Log.d("debug", s);
+            }
+        }, userId);
     }
 
     private void populateProfileHeader(User user) {
@@ -60,20 +67,5 @@ public class ProfileActivity extends FragmentActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
